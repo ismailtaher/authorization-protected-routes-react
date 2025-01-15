@@ -8,6 +8,7 @@ import Lounge from "./components/Lounge";
 import Missing from "./components/Missing";
 import Unauthorized from "./components/Unauthorized";
 import Layout from "./components/Layout";
+import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -21,11 +22,12 @@ function App() {
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* Routes we want to protect */}
-        <Route path="/" element={<Home />} />
-        <Route path="editor" element={<Editor />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="lounge" element={<Lounge />} />
-
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Home />} />
+          <Route path="editor" element={<Editor />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="lounge" element={<Lounge />} />
+        </Route>
         {/* catch all */}
         <Route path="*" element={<Missing />} />
       </Route>
